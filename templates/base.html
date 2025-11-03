@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blogs</title>
+    <style>
+        nav{
+            display: flex;
+            justify-content: space-between;
+            position: fixed;
+            align-items: center;
+            width: 100%;
+            left: 0;
+            top: 0;
+            background-color: white;
+            box-shadow: 0px 0px 10px #00000033;
+            padding: 32px 80px;
+        }
+        .nav-ul{
+            display: flex;
+            gap: 52px;
+            list-style: none;
+        }
+        a{
+            text-decoration: none;
+            color: black;
+            font-size: 20px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .blog{
+            font-size: 30px;
+        }
+    </style>
+     
+</head>
+<body>
+    <nav>
+        <a class="blog" href="{% url 'home' %}">Blog</a>
+        <div>
+            <ul class="nav-ul" >
+                {% if user.is_authenticated %}
+                    <li>
+                        <a href="{% url 'create_post' %}">Create Blog</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'logout' %}">Logout</a>
+                    </li>
+                {% else %}
+                    <li>
+                        <a href="{% url 'login' %}">Login</a>
+                    </li>
+                    <li>
+                        <a href="{% url 'register' %}">Sign Up</a>
+                    </li>
+                {% endif %}
+            </ul>
+        </div>
+    </nav>
+    <div>
+        {% block content %} {% endblock %}
+    </div>
+</body>
+</html>
